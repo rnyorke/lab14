@@ -29,9 +29,21 @@ class MyApp:
 		self.myContainer1.pack()
 		
 		self.button1 = Button(self.myContainer1)
-		self.button1.configure(text="Up", background= "green")
+		self.button1.configure(text="Up", background= "MediumPurple1")
 		self.button1.grid(row=0,column=0)
-					
+		
+		self.button2 = Button(self.myContainer1)
+		self.button2.configure(text="Left", background= "MediumPurple2")
+		self.button2.grid(row=0,column=1)
+		
+		self.button3 = Button(self.myContainer1)
+		self.button3.configure(text="Right", background= "MediumPurple3")
+		self.button3.grid(row=0,column=2)	
+		
+		self.button4 = Button(self.myContainer1)
+		self.button4.configure(text="Down", background= "MediumPurple4")
+		self.button4.grid(row=0,column=3)	
+				
 		# "Bind" an action to the first button												
 		self.button1.bind("<Button-1>", self.button1Click)
 

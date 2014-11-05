@@ -46,12 +46,17 @@ class MyApp:
 				
 		# "Bind" an action to the first button												
 		self.button1.bind("<Button-1>", self.button1Click)
-
+		self.button2.bind("<Button-1>", self.button2Click)
+		self.button3.bind("<Button-1>", self.button3Click)		
+		self.button4.bind("<Button-1>", self.button4Click)
 		  
 		# This creates the drawpad - no need to change this 
 		drawpad.pack()
-		
-
+		x1,y1,x2,y2 = drawpad.coords(player)
+                if(targetx1 < x1 and targetx2 > x1) and (targety1 < y1 and targety2 > y2):
+                    drawpad.itemconfig(target,fill="red")
+                else:
+                    drawpad.itemconfig(target,fill="blue")
 		
 	def button1Click(self, event):   
                 # "global" makes sure that we can access our oval and our drawpad
@@ -59,8 +64,47 @@ class MyApp:
 		global drawpad
                 x1,y1,x2,y2 = drawpad.coords(player)
 		global targetx1, targety1, targetx2, targety2
-
-
+                drawpad.move(player,0,-10)
+                x1,y1,x2,y2 = drawpad.coords(player)
+                if(targetx1 < x1 and targetx2 > x1) and (targety1 < y1 and targety2 > y2):
+                    drawpad.itemconfig(target,fill="red")
+                else:
+                    drawpad.itemconfig(target,fill="blue")
+                    
+	def button2Click(self, event):   
+                # "global" makes sure that we can access our oval and our drawpad
+		global oval
+		global drawpad
+                x1,y1,x2,y2 = drawpad.coords(player)
+		global targetx1, targety1, targetx2, targety2
+                drawpad.move(player,-10,0)
+                if(targetx1 < x1 and targetx2 > x1) and (targety1 < y1 and targety2 > y2):
+                    drawpad.itemconfig(target,fill="red")
+                else:
+                    drawpad.itemconfig(target,fill="blue")                
+	def button3Click(self, event):   
+                # "global" makes sure that we can access our oval and our drawpad
+		global oval
+		global drawpad
+                x1,y1,x2,y2 = drawpad.coords(player)
+		global targetx1, targety1, targetx2, targety2
+                drawpad.move(player,10,0)
+                if(targetx1 < x1 and targetx2 > x1) and (targety1 < y1 and targety2 > y2):
+                    drawpad.itemconfig(target,fill="red")
+                else:
+                    drawpad.itemconfig(target,fill="blue")                
+	def button4Click(self, event):   
+                # "global" makes sure that we can access our oval and our drawpad
+		global oval
+		global drawpad
+                x1,y1,x2,y2 = drawpad.coords(player)
+		global targetx1, targety1, targetx2, targety2
+                drawpad.move(player,0,10)
+                if(targetx1 < x1 and targetx2 > x1) and (targety1 < y1 and targety2 > y2):
+                    drawpad.itemconfig(target,fill="red")
+                else:
+                    drawpad.itemconfig(target,fill="blue")                
+                
 		# Ensure that we are doing our collision detection
 		# After we move our object!
 	

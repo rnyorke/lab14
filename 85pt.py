@@ -50,7 +50,9 @@ class MyApp:
 		global drawpad
 		global drawpadwidth
 		global drawpadheight
-	        drawpad.move(oval,-10,0)
+	        x1,y1,x2,y2 = drawpad.coords(oval)    
+	        if x1 > 0:
+	            drawpad.move(oval, -10,0)
 	def button2Click(self, event):   
 		# Make the oval move to the left!
                 # "global" makes sure that we can access our oval and our drawpad
@@ -59,7 +61,13 @@ class MyApp:
 		global drawpad
 		global drawpadwidth
 		global drawpadheight
-	        drawpad.move(oval,10,0)
+		#drawpad.move(oval, 10,0)
+	        x1,y1,x2,y2 = drawpad.coords(oval)
+                if x2 < 480:
+                    drawpad.move(oval, 9,0)
+
+
+	  
 	# Add the button2Click method
 		
 myapp = MyApp(root)

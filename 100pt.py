@@ -20,8 +20,6 @@ targety2 = 80
 target = drawpad.create_rectangle(targetx1,targety1,targetx2,targety2, fill="blue")
 player = drawpad.create_rectangle(240,240,260,260, fill="pink")
 
-
-
 class MyApp:
 	def __init__(self, parent):
 	        # Make sure the drawpad is accessible from inside the function
@@ -45,36 +43,29 @@ class MyApp:
 		self.button4 = Button(self.myContainer1)
 		self.button4.configure(text="RIght", background= "green")
 		self.button4.grid(row=2,column=2)	
-									
-		# "Bind" an action to the first button												
+												
 		self.button1.bind("<Button-1>", self.button1Click)
 		self.button2.bind("<Button-1>", self.button2Click)
 		self.button3.bind("<Button-1>", self.button3Click)
 		self.button4.bind("<Button-1>", self.button4Click)				  
 		# This creates the drawpad - no need to change this 
 		drawpad.pack()
-		
 
-		
 	def button1Click(self, event):   
                 # "global" makes sure that we can access our oval and our drawpad
 		global oval
 		global drawpad
                 x1,y1,x2,y2 = drawpad.coords(player)
                 drawpad.move(player,0,-10)
-                
 		# Get the coords of our target
-		tx1,ty1,ty1,ty2 = drawpad.coords(target)
-
-
+		tx1,ty1,tx1,ty2 = drawpad.coords(target)
 
 		# Ensure that we are doing our collision detection
 		# After we move our object!
                 didWeHit = collisionDetect()
                 if(didWeHit == True):
                     # We made contact! Stop our animation!
-                    print "Do something"
-                    
+                    print "Do something"         
 	def button2Click(self, event):   
                 # "global" makes sure that we can access our oval and our drawpad
 		global oval
@@ -85,7 +76,20 @@ class MyApp:
 		# Get the coords of our target
 		tx1,ty1,ty1,ty2 = drawpad.coords(target)
 
-
+		# Ensure that we are doing our collision detection
+		# After we move our object!
+                didWeHit = collisionDetect()
+                if(didWeHit == True):
+                    # We made contact! Stop our animation!
+                    print "Do something"                                      
+        def button3Click(self, event):   
+                # "global" makes sure that we can access our oval and our drawpad
+		global oval
+		global drawpad
+                x1,y1,x2,y2 = drawpad.coords(player)
+                drawpad.move(player,0,10)
+		# Get the coords of our target
+		tx1,ty1,tx1,ty2 = drawpad.coords(target)
 
 		# Ensure that we are doing our collision detection
 		# After we move our object!
@@ -93,43 +97,14 @@ class MyApp:
                 if(didWeHit == True):
                     # We made contact! Stop our animation!
                     print "Do something"
-                    
-                    
-                    
-                    
-                    
-        def button3Click(self, event):   
-                # "global" makes sure that we can access our oval and our drawpad
-		global oval
-		global drawpad
-                x1,y1,x2,y2 = drawpad.coords(player)
-                drawpad.move(player,0,10)
-                
-		# Get the coords of our target
-		tx1,ty1,ty1,ty2 = drawpad.coords(target)
-
-
-
-		# Ensure that we are doing our collision detection
-		# After we move our object!
-                didWeHit = collisionDetect(target)
-                if(didWeHit == True):
-                    # We made contact! Stop our animation!
-                    print "Do something"
-                    
-                    
-                    
 	def button4Click(self, event):   
                 # "global" makes sure that we can access our oval and our drawpad
 		global oval
 		global drawpad
                 x1,y1,x2,y2 = drawpad.coords(player)
                 drawpad.move(player,10,0)
-                
 		# Get the coords of our target
-		tx1,ty1,ty1,ty2 = drawpad.coords(target)
-
-
+		tx1,ty1,tx1,ty2 = drawpad.coords(target)
 
 		# Ensure that we are doing our collision detection
 		# After we move our object!
@@ -144,11 +119,25 @@ class MyApp:
                 global oval
 		global drawpad
                 x1,y1,x2,y2 = drawpad.coords(player)
-
+                tx1, ty1, tx1, ty2 = drawpad.coords(player)
+                if (x1 > tx1 and x2 < xy2) and (y1 >ty2 and y2 < ty2) :
+                    drawpad.itemconfig(target, fill = "red")
+                else:
+                    drawpad.itemconfig(target, fill = "blue")
                 # Do your if statement - remember to return True if successful!
-                
-	    
-		
-myapp = MyApp(root)
+        
+direction = 1
+def animate():
+    global direction
+    tx1, ty1, tx2, ty2 = drawpad.coords(target)
+    if tx2 > 480: 
+        direction = -1
+    elif tx1 < 0:
+        direction = 1
+    drawpad.move(target,direction,0)
+    drawpad.after(1, animate)
 
+
+animate()		
+myapp = MyApp(root)
 root.mainloop()
